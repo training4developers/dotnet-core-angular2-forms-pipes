@@ -12,12 +12,12 @@ interface SelectOption {
 @Component({
     selector: "widget-edit",
     template: require("./widget-edit.component.html"),
-    styles: [ require("./widget-edit.component.scss") ]
+    styles: [require("./widget-edit.component.scss")]
 })
 export class WidgetEdit implements OnInit {
 
     // the widget to modify in the form
-    private widget: Widget = { color:"", size:"", quantity: 0, price: 0 } as Widget;
+    private widget: Widget = { color: "", size: "", quantity: 0, price: 0 } as Widget;
 
     // options for drop downs
     private colors: SelectOption[] = [
@@ -62,25 +62,25 @@ export class WidgetEdit implements OnInit {
 
         // if the widget has an id, then update it; otherwise, insert it
         // after saving, return to the widget table
-		if (this.widget.id) {
-			this.widgets.update(this.widget).subscribe(() =>
-				this.router.navigateByUrl("/"));
-		} else {
-			this.widgets.insert(this.widget).subscribe(() =>
-				this.router.navigateByUrl("/"));
-		}
+        if (this.widget.id) {
+            this.widgets.update(this.widget).subscribe(() =>
+                this.router.navigateByUrl("/"));
+        } else {
+            this.widgets.insert(this.widget).subscribe(() =>
+                this.router.navigateByUrl("/"));
+        }
 
     }
 
     // delete the widget with the specified id, then return
     // to the table of widgets
     public deleteWidget(widgetId: number) {
-		this.widgets.delete(widgetId)
-			.subscribe(() => this.router.navigateByUrl("/"));
+        this.widgets.delete(widgetId)
+            .subscribe(() => this.router.navigateByUrl("/"));
     }
 
     // return to the table of widgets
     public returnToList() {
-		this.router.navigateByUrl("/");
+        this.router.navigateByUrl("/");
     }
 }

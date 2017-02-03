@@ -4,14 +4,20 @@ import { Router } from "@angular/router";
 import { Widgets } from "../../services/widgets";
 import { Widget } from "../../models/widget";
 
+// The Component Decorator configures this class
+// to serve as a component in the Angular 2 application
 @Component({
+    // Used to identify the element the component will be applied to in
+    // the DOM structure of the web page    
     selector: "widget-table",
+    // Loads the component's specific styles
     template: require("./widget-table.component.html"),
+    // Loads the component's template
     styles: [ require("./widget-table.component.scss") ]
 })
 export class WidgetTable implements OnInit {
 
-    // private fields to hold widgets
+    // private field to hold an array of widgets
     private widgets: Widget[] = [];
 
     constructor(

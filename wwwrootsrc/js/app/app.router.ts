@@ -9,8 +9,8 @@ import { WidgetEdit } from './components/widget-edit/widget-edit.component';
 // :widgetId is the parameter
 const appRoutes: Route[] = [
     { path: 'widget/create', component: WidgetEdit },
-    { path: 'widget/:widgetId', component: WidgetView },
     { path: 'widget/:widgetId/edit', component: WidgetEdit },
+    { path: 'widget/:widgetId', component: WidgetView },
 	{ path: '', component: WidgetTable },
 ];
 
