@@ -1,34 +1,45 @@
-<form>
+<form novalidate>
 
-    <div>
+    <div class="form-group">
         <label for="widget-name-input">Name:</label>
-        <input type="text" id="widget-name-input"
-            name="widgetNameInput" [(ngModel)]="widget.name">
+        <input type="text" id="widget-name-input" required #widgetNameInput="ngModel"
+            name="widgetName" [(ngModel)]="widget.name">
+        <span *ngIf="widgetNameInput.invalid">Please enter a widget name.</span>
     </div>
-    <div>
+    <div class="form-group">
         <label for="widget-description-input">Description:</label>
-        <input type="text" id="widget-description-input"
-            name="widgetDescriptionInput" [(ngModel)]="widget.description">
+        <textarea id="widget-description-input"
+            name="widgetDescription" [(ngModel)]="widget.description"></textarea>         
     </div>
-    <div>
-        <label for="widget-color-input">Color:</label>
-        <input type="text" id="widget-color-input"
-            name="widgetColorInput" [(ngModel)]="widget.color">
+    <div class="form-group">
+        <label for="widget-color-select">Color:</label>
+        <select id="widget-color-select" required #widgetColorSelect="ngModel"
+            name="widgetColor" [(ngModel)]="widget.color">
+            <option value="">Select One...</option>
+            <option *ngFor="let color of colors" [value]="color.value">{{color.label}}</option>
+        </select>
+        <span *ngIf="widgetColorSelect.invalid">Please select a widget color.</span>        
     </div>
-    <div>
+    <div class="form-group">
         <label for="widget-size-input">Size:</label>
-        <input type="text" id="widget-size-input"
-            name="widgetSizeInput" [(ngModel)]="widget.size">
+        <select id="widget-size-select" required #widgetSizeSelect="ngModel"
+            name="widgetSize" [(ngModel)]="widget.size">
+            <option value="">Select One...</option>
+            <option *ngFor="let size of sizes" [value]="size.value">{{size.label}}</option>
+        </select>
+        <span *ngIf="widgetSizeSelect.invalid">Please select a widget size.</span>        
     </div>
-    <div>
+    <div class="form-group">
         <label for="widget-quantity-input">Quantity:</label>
-        <input type="text" id="widget-quantity-input"
-            name="widgetQuantityInput" [(ngModel)]="widget.quantity">
+        <input type="number" id="widget-quantity-input" required #widgetQuantityInput="ngModel"
+            name="widgetQuantity" [(ngModel)]="widget.quantity">
+        <span *ngIf="widgetQuantityInput.invalid">Please enter a widget quantity.</span>        
     </div>
-    <div>
+    <div class="form-group">
         <label for="widget-price-input">Price:</label>
-        <input type="text" id="widget-price-input"
-            name="widgetPriceInput" [(ngModel)]="widget.price">
+        <input type="number" id="widget-price-input" required  #widgetPriceInput="ngModel"
+            name="widgetPrice" [(ngModel)]="widget.price">
+        <span *ngIf="widgetPriceInput.invalid">Please enter a price quantity.</span>        
     </div>
 
     <button type="button" (click)="saveWidget(widget)">Save</button>

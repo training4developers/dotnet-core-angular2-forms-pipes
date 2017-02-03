@@ -135,7 +135,8 @@ webpackJsonp([0],{
 	var router_1 = __webpack_require__(27);
 	var widgets_1 = __webpack_require__(60);
 	var WidgetTable = (function () {
-	    function WidgetTable(widgetsSvc, router) {
+	    function WidgetTable(widgetsSvc, // the widgets data service
+	        router) {
 	        this.widgetsSvc = widgetsSvc;
 	        this.router = router;
 	        // private fields to hold widgets
@@ -273,11 +274,10 @@ webpackJsonp([0],{
 	var WidgetView = (function () {
 	    function WidgetView(widgets, // the widgets data service
 	        route, // the current route
-	        router // the router to navigate to other routes
-	    ) {
+	        router) {
 	        this.widgets = widgets;
 	        this.route = route;
-	        this.router = router; // the router to navigate to other routes
+	        this.router = router;
 	    }
 	    // load the widget with the route param once the component
 	    // has been loaded
@@ -305,8 +305,7 @@ webpackJsonp([0],{
 	    }),
 	    __metadata("design:paramtypes", [widgets_1.Widgets,
 	        router_1.ActivatedRoute,
-	        router_1.Router // the router to navigate to other routes
-	    ])
+	        router_1.Router])
 	], WidgetView);
 	exports.WidgetView = WidgetView;
 
@@ -344,16 +343,37 @@ webpackJsonp([0],{
 	var router_1 = __webpack_require__(27);
 	var widgets_1 = __webpack_require__(60);
 	var WidgetEdit = (function () {
-	    function WidgetEdit(widgets, route, router) {
+	    function WidgetEdit(widgets, // the widgets data service
+	        route, // the current route
+	        router) {
 	        this.widgets = widgets;
 	        this.route = route;
 	        this.router = router;
-	        this.widget = {};
+	        // the widget to modify in the form
+	        this.widget = { color: "", size: "", quantity: 0, price: 0 };
+	        // options for drop downs
+	        this.colors = [
+	            { value: "red", label: "Red" },
+	            { value: "blue", label: "Blue" },
+	            { value: "green", label: "Green" },
+	            { value: "yellow", label: "Yellow" },
+	            { value: "orange", label: "Orange" },
+	            { value: "purple", label: "Purple" },
+	        ];
+	        this.sizes = [
+	            { value: "tiny", label: "Tiny" },
+	            { value: "small", label: "Small" },
+	            { value: "medium", label: "Medium" },
+	            { value: "large", label: "Large" },
+	            { value: "huge", label: "Huge" },
+	        ];
 	    }
 	    WidgetEdit.prototype.ngOnInit = function () {
 	        var _this = this;
 	        // if a widget id param is supplied, load the widget
 	        this.route.params.subscribe(function (params) {
+	            // check to see if a widget id has been specified, if it had,
+	            // then load the widget
 	            if (params["widgetId"]) {
 	                _this.widgets.get(Number(params["widgetId"])).subscribe(function (widget) {
 	                    return _this.widget = widget;
@@ -407,7 +427,7 @@ webpackJsonp([0],{
 /***/ 67:
 /***/ function(module, exports) {
 
-	module.exports = "<form>\n\n    <div>\n        <label for=\"widget-name-input\">Name:</label>\n        <input type=\"text\" id=\"widget-name-input\"\n            name=\"widgetNameInput\" [(ngModel)]=\"widget.name\">\n    </div>\n    <div>\n        <label for=\"widget-description-input\">Description:</label>\n        <input type=\"text\" id=\"widget-description-input\"\n            name=\"widgetDescriptionInput\" [(ngModel)]=\"widget.description\">\n    </div>\n    <div>\n        <label for=\"widget-color-input\">Color:</label>\n        <input type=\"text\" id=\"widget-color-input\"\n            name=\"widgetColorInput\" [(ngModel)]=\"widget.color\">\n    </div>\n    <div>\n        <label for=\"widget-size-input\">Size:</label>\n        <input type=\"text\" id=\"widget-size-input\"\n            name=\"widgetSizeInput\" [(ngModel)]=\"widget.size\">\n    </div>\n    <div>\n        <label for=\"widget-quantity-input\">Quantity:</label>\n        <input type=\"text\" id=\"widget-quantity-input\"\n            name=\"widgetQuantityInput\" [(ngModel)]=\"widget.quantity\">\n    </div>\n    <div>\n        <label for=\"widget-price-input\">Price:</label>\n        <input type=\"text\" id=\"widget-price-input\"\n            name=\"widgetPriceInput\" [(ngModel)]=\"widget.price\">\n    </div>\n\n    <button type=\"button\" (click)=\"saveWidget(widget)\">Save</button>\n    <button type=\"button\" *ngIf=\"widget.id\" (click)=\"deleteWidget(widget.id)\">Delete</button>\n    <button type=\"button\" (click)=\"returnToList()\">Return to List</button>\n\n</form>";
+	module.exports = "<form novalidate>\n\n    <div class=\"form-group\">\n        <label for=\"widget-name-input\">Name:</label>\n        <input type=\"text\" id=\"widget-name-input\" required #widgetNameInput=\"ngModel\"\n            name=\"widgetName\" [(ngModel)]=\"widget.name\">\n        <span *ngIf=\"widgetNameInput.invalid\">Please enter a widget name.</span>\n    </div>\n    <div class=\"form-group\">\n        <label for=\"widget-description-input\">Description:</label>\n        <textarea id=\"widget-description-input\"\n            name=\"widgetDescription\" [(ngModel)]=\"widget.description\"></textarea>         \n    </div>\n    <div class=\"form-group\">\n        <label for=\"widget-color-select\">Color:</label>\n        <select id=\"widget-color-select\" required #widgetColorSelect=\"ngModel\"\n            name=\"widgetColor\" [(ngModel)]=\"widget.color\">\n            <option value=\"\">Select One...</option>\n            <option *ngFor=\"let color of colors\" [value]=\"color.value\">{{color.label}}</option>\n        </select>\n        <span *ngIf=\"widgetColorSelect.invalid\">Please select a widget color.</span>        \n    </div>\n    <div class=\"form-group\">\n        <label for=\"widget-size-input\">Size:</label>\n        <select id=\"widget-size-select\" required #widgetSizeSelect=\"ngModel\"\n            name=\"widgetSize\" [(ngModel)]=\"widget.size\">\n            <option value=\"\">Select One...</option>\n            <option *ngFor=\"let size of sizes\" [value]=\"size.value\">{{size.label}}</option>\n        </select>\n        <span *ngIf=\"widgetSizeSelect.invalid\">Please select a widget size.</span>        \n    </div>\n    <div class=\"form-group\">\n        <label for=\"widget-quantity-input\">Quantity:</label>\n        <input type=\"number\" id=\"widget-quantity-input\" required #widgetQuantityInput=\"ngModel\"\n            name=\"widgetQuantity\" [(ngModel)]=\"widget.quantity\">\n        <span *ngIf=\"widgetQuantityInput.invalid\">Please enter a widget quantity.</span>        \n    </div>\n    <div class=\"form-group\">\n        <label for=\"widget-price-input\">Price:</label>\n        <input type=\"number\" id=\"widget-price-input\" required  #widgetPriceInput=\"ngModel\"\n            name=\"widgetPrice\" [(ngModel)]=\"widget.price\">\n        <span *ngIf=\"widgetPriceInput.invalid\">Please enter a price quantity.</span>        \n    </div>\n\n    <button type=\"button\" (click)=\"saveWidget(widget)\">Save</button>\n    <button type=\"button\" *ngIf=\"widget.id\" (click)=\"deleteWidget(widget.id)\">Delete</button>\n    <button type=\"button\" (click)=\"returnToList()\">Return to List</button>\n\n</form>";
 
 /***/ },
 

@@ -15,8 +15,8 @@ export class WidgetTable implements OnInit {
     private widgets: Widget[] = [];
 
     constructor(
-        private widgetsSvc: Widgets,
-        private router: Router
+        private widgetsSvc: Widgets, // the widgets data service
+        private router: Router, // the router to navigate to other routes
     ) { }
 
     // retrieve all of the widgets from the REST service when

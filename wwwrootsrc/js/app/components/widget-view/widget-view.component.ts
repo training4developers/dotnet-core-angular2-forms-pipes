@@ -16,7 +16,7 @@ export class WidgetView implements OnInit {
     constructor(
         private widgets: Widgets, // the widgets data service
         private route: ActivatedRoute, // the current route
-        private router: Router // the router to navigate to other routes
+        private router: Router, // the router to navigate to other routes
     ) { }
 
     // load the widget with the route param once the component
