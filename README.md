@@ -1,4 +1,4 @@
-# .NET Core + Angular 2 Tutorial - Part 3 - Angular 2 Routing & Services
+# .NET Core + Angular 2 Tutorial - Part 4 - Angular 2 Forms & Pipes
 
 Read the tutorial here: []()
 
