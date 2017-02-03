@@ -1,4 +1,4 @@
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
       <th>Name</th>
@@ -12,13 +12,15 @@
   <tbody>
    <tr *ngFor="let widget of widgets">
      <td>{{widget.name}}</td>
-     <td>{{widget.color}}</td>
-     <td>{{widget.size}}</td>
-     <td>{{widget.quantity}}</td>
-     <td>{{widget.price}}</td>
-     <td>
+     <td class="text-center">{{widget.color | capitalize}}</td>
+     <td class="text-center">{{widget.size | capitalize}}</td>
+     <td class="text-right">{{widget.quantity}}</td>
+     <td class="text-right">{{widget.price | currency:'USD':true:'1.2-2'}}</td>
+     <td class="text-center">
          <button type="button" (click)="viewWidget(widget.id)">View</button>
+         <button type="button" (click)="editWidget(widget.id)">Edit</button>
      </td>
     </tr>
    </tbody>
 </table>
+<button type="button" (click)="createWidget()">Create Widget</button>

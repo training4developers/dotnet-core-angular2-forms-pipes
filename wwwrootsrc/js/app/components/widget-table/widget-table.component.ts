@@ -31,4 +31,13 @@ export class WidgetTable implements OnInit {
         this.router.navigate(['widget', widgetId]);
     }
 
+    // navigate to the widget edit component in update mode
+    editWidget(widgetId: number) {
+        this.router.navigate(['widget', widgetId, "edit"]);
+    }
+
+    // navigate to the widget edit component in insert mode
+    createWidget() {
+        this.router.navigate(['widget', "create"]);
+    }
 }

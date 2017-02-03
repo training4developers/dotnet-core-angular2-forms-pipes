@@ -1,0 +1,38 @@
+<form>
+
+    <div>
+        <label for="widget-name-input">Name:</label>
+        <input type="text" id="widget-name-input"
+            name="widgetNameInput" [(ngModel)]="widget.name">
+    </div>
+    <div>
+        <label for="widget-description-input">Description:</label>
+        <input type="text" id="widget-description-input"
+            name="widgetDescriptionInput" [(ngModel)]="widget.description">
+    </div>
+    <div>
+        <label for="widget-color-input">Color:</label>
+        <input type="text" id="widget-color-input"
+            name="widgetColorInput" [(ngModel)]="widget.color">
+    </div>
+    <div>
+        <label for="widget-size-input">Size:</label>
+        <input type="text" id="widget-size-input"
+            name="widgetSizeInput" [(ngModel)]="widget.size">
+    </div>
+    <div>
+        <label for="widget-quantity-input">Quantity:</label>
+        <input type="text" id="widget-quantity-input"
+            name="widgetQuantityInput" [(ngModel)]="widget.quantity">
+    </div>
+    <div>
+        <label for="widget-price-input">Price:</label>
+        <input type="text" id="widget-price-input"
+            name="widgetPriceInput" [(ngModel)]="widget.price">
+    </div>
+
+    <button type="button" (click)="saveWidget(widget)">Save</button>
+    <button type="button" *ngIf="widget.id" (click)="deleteWidget(widget.id)">Delete</button>
+    <button type="button" (click)="returnToList()">Return to List</button>
+
+</form>

@@ -10,14 +10,28 @@ import { NgModule } from '@angular/core';
 // and other platform modules will be available.
 import { BrowserModule } from '@angular/platform-browser';
 
+// Imports the Forms module to provide access to NgModel to
+// perform two-way data binding between form controls and
+// the component data
+import { FormsModule } from '@angular/forms';
+
+// Imports the Http module to provide access to AJAX request
+// to REST services
 import { HttpModule } from '@angular/http';
 
+// Imports the routing configuration for the application
 import { AppRouterModule } from './app.router'; 
 
-// Imports the components to be registered with the Application
+// Imports the components to be registered with the application
+// so they can be referenced in templates and by the router
 import { AppComponent } from './app.component';
 import { WidgetTable } from "./components/widget-table/widget-table.component";
 import { WidgetView } from "./components/widget-view/widget-view.component";
+import { WidgetEdit } from "./components/widget-edit/widget-edit.component";
+
+// Imports the pipes to be registered with the application
+// so they can be reference in the templates
+import { CapitalizePipe } from "./pipes/capitalize.pipe";
 
 // Imports the Widgets Service so it can be registered with the Application Module
 import { Widgets } from "./services/widgets";
@@ -33,14 +47,16 @@ import '../../css/styles.scss';
 // Each Angular 2 application has a top-level AppModule
 // from which the application bootstraps itself
 @NgModule({
-    // import the BrowserModule and the
-    // HttpModule into the App module
-    imports: [ BrowserModule, HttpModule, AppRouterModule ],
+    // import modules needed for the application
+    imports: [ BrowserModule, FormsModule, HttpModule, AppRouterModule ],
+
     // Make the App, Widget Table, and Widget View components available
     // for use in the templates
-    declarations: [ AppComponent, WidgetTable, WidgetView ],
+    declarations: [ AppComponent, WidgetTable, WidgetView, WidgetEdit, CapitalizePipe ],
+
     // Start the application from the App component
     bootstrap: [ AppComponent ],
+
     // makes the service available to the component
     providers: [ Widgets ],    
 })

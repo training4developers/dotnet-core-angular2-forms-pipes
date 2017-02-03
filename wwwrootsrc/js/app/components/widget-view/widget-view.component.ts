@@ -27,6 +27,11 @@ export class WidgetView implements OnInit {
                 .subscribe(widget => this.widget = widget));
     }
 
+    // navigate to the widget view component
+    editWidget(widgetId: number) {
+        this.router.navigate(['widget', widgetId, "edit"]);
+    }
+
     // navigate to the widget table
     public returnToList() {
         this.router.navigateByUrl('/');
