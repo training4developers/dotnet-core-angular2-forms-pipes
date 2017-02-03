@@ -1,4 +1,4 @@
-# .NET Core + Angular 2 Tutorial - Part 4 - Angular 2 Forms & Pipes
+# .NET Core + Angular 2 Tutorial - Part 4 - Forms & Pipes
 
 Read the tutorial here: []()
 
